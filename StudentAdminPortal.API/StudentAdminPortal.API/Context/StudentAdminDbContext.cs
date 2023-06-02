@@ -15,7 +15,7 @@ namespace StudentAdminPortal.API.Context
         }
 
         public DbSet<Student> Student { get; set; }
-        public DbSet<Address> Addresse { get; set; }
+        public DbSet<Address> Address { get; set; }
         public DbSet<Gender> Gender { get; set; }
 
     }
