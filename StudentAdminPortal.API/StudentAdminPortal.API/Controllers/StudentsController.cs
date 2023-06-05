@@ -60,7 +60,7 @@ namespace StudentAdminPortal.API.Controllers
         }
 
         [HttpGet]
-        [Route("[controller]/{studentId:Guid}")]
+        [Route("[controller]/{studentId:Guid}"),ActionName("GetStudetAsync")]
         public async Task<IActionResult> GetStudetAsync([FromRoute] Guid studentId)
         {
         var student = await studentRepository.GetStudentAsync(studentId);
@@ -103,5 +103,13 @@ namespace StudentAdminPortal.API.Controllers
             return NotFound();
         }
 
+        [HttpPost]
+        [Route("[controller]/addstudent")]
+        public async Task<IActionResult> AddStudentAsync([FromBody] AddStudentResult result)
+        {
+            var student = await studentRepository.AddStudent(mapper.Map<DataModels.Student>(result));
+            return CreatedAtAction(nameof(GetStudetAsync), new { studentId = student.Id },
+                mapper.Map<Student>(student));
+        }
     }
 }
